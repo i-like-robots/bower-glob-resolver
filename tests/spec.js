@@ -1,4 +1,5 @@
 const path = require('path')
+const rimraf = require('rimraf')
 const subject = require('../')
 
 describe('bower-glob-resolver', () => {
@@ -23,15 +24,20 @@ describe('bower-glob-resolver', () => {
   })
 
   describe('#fetch', () => {
+    let temp
     let result
 
     beforeEach(() => {
-      const tmp = instance.fetch({
+      temp = instance.fetch({
         name: 'component-dependencies',
         source: 'glob:./tests/fixture/components/*/bower.json'
       })
 
-      result = require(path.join(tmp.tempPath, 'bower.json'))
+      result = require(path.join(temp.tempPath, 'bower.json'))
+    })
+
+    afterEach(() => {
+      rimraf.sync(temp.tempPath)
     })
 
     it('creates a temporary package with the given name', () => {
@@ -39,7 +45,8 @@ describe('bower-glob-resolver', () => {
     })
 
     it('adds all glob matches as dependencies', () => {
-      expect(Object.keys(result.dependencies)).toEqual(['footer-component', 'header-component'])
+      const dependencies = Object.keys(result.dependencies)
+      expect(dependencies).toEqual(['footer-component', 'header-component'])
     })
   })
 })

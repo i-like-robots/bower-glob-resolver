@@ -18,18 +18,16 @@ module.exports = function(bower) {
 
       manifestFiles.forEach((manifestFile) => {
         const manifestJSON = require(manifestFile)
-        const packagePath = path.dirname(manifestFile)
+        const manifestPath = path.dirname(manifestFile)
 
-        log(`Adding dependency on ${packagePath}`)
-        tempJSON.dependencies[manifestJSON.name] = packagePath
+        log(`Adding dependency on ${manifestPath}`)
+        tempJSON.dependencies[manifestJSON.name] = manifestPath
       })
 
       const outputJSON = JSON.stringify(tempJSON, null, 2)
 
       const tmpDir = tmp.dirSync()
       fs.writeFileSync(path.join(tmpDir.name, 'bower.json'), outputJSON)
-
-      console.log(tmpDir)
 
       return {
         tempPath: tmpDir.name,
