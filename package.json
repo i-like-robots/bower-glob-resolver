@@ -1,0 +1,20 @@
+{
+  "name": "bower-glob-resolver",
+  "version": "1.0.0",
+  "description": "A resolver plugin for Bower which enables the use of multiple, external bower.json files in your project which can be found using a glob pattern.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bower-resolver",
+    "glob"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.3",
+    "semver": "^5.6.0",
+    "tmp": "0.0.33"
+  }
+}

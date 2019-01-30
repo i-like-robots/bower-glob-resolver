@@ -1,0 +1,7 @@
+.nyc_output/
+coverage/
+test/
+.editorconfig
+.prettierrc.json
+.travis.yml
+greenkeeper.json
