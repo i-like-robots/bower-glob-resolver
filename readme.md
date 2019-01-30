@@ -1,6 +1,6 @@
 # Bower Glob Resolver
 
-A [resolver plugin] for [Bower] which enables the use of multiple, external `bower.json` files in your project which can be found using a [glob pattern]. This is ideal for codebases which contain multiple packages or components.
+A [resolver plugin] for [Bower] which enables the use of multiple, external `bower.json` files in your project which can be found using a [glob pattern]. This can be useful for codebases which contain multiple packages or components or have dependencies installed not using Bower.
 
 [resolver plugin]: https://bower.io/docs/pluggable-resolvers/
 [Bower]: https://bower.io/
@@ -71,7 +71,7 @@ $ bower install
 
 ## How it works
 
-This resolver works by creating a temporary package which has dependencies on all of the packages found by the glob match.
+This resolver works by creating a temporary package which has dependencies on all of the other packages matched by the glob pattern.
 
 
 ### License
