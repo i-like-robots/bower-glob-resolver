@@ -3,13 +3,15 @@ const path = require('path')
 const tmp = require('tmp')
 const glob = require('glob')
 
+const PATTERN = /^glob:/
+
 module.exports = function() {
   return {
     match(source) {
-      return source.startsWith('glob:')
+      return PATTERN.test(source)
     },
     fetch({ source, name }) {
-      const globPattern = source.replace(/^glob:/, '')
+      const globPattern = source.replace(PATTERN, '')
       const manifestFiles = glob.sync(globPattern, { absolute: true })
       const tempJSON = { name, dependencies: {} }
 

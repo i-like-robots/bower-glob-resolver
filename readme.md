@@ -1,6 +1,6 @@
 # Bower Glob Resolver
 
-A [resolver plugin] for [Bower] which enables the use of multiple, external `bower.json` files in your project which can be found using a [glob pattern].
+A [resolver plugin] for [Bower] which enables the use of multiple, external `bower.json` files in your project which can be found using a [glob pattern]. This is ideal for codebases which contain multiple packages or components.
 
 [resolver plugin]: https://bower.io/docs/pluggable-resolvers/
 [Bower]: https://bower.io/
@@ -34,7 +34,9 @@ After installing this package you will need create or amend Bower's `.bowerrc` [
 
 ## Usage
 
-This resolver will be used whenever a dependency's source begins with `glob:`. The value after this prefix should be a valid [glob pattern] ending `bower.json`. For example, a project could contain multiple component packages using this folder structure:
+This resolver will be used whenever a dependency's source begins with `glob:`. The value after this prefix must be a valid [glob pattern] ending with `bower.json`.
+
+For example, a project containing multiple components may use this folder structure:
 
 ```
 my-project/
@@ -47,7 +49,7 @@ my-project/
 └── bower.json
 ```
 
-Using `bower-glob-resolver` it is possible to install all of the dependencies needed for every component package by adding a source by adding a new dependency with a glob source (the name doesn't matter):
+To install all of the Bower dependencies for every component in the project a new dependency must be added to the root `bower.json` file (the name doesn't matter so long as it is unique.) The source of this dependency should be a glob pattern matching the component `bower.json` files:
 
 ```json
 {
@@ -56,6 +58,11 @@ Using `bower-glob-resolver` it is possible to install all of the dependencies ne
   }
 }
 ```
+
+
+## How it works
+
+This resolver works by creating a temporary package which has dependencies on all of the packages found by the glob match.
 
 
 ### License
