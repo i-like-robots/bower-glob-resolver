@@ -5,7 +5,7 @@ const glob = require('glob')
 
 const PATTERN = /^glob:/
 
-module.exports = function() {
+module.exports = function(bower) {
   return {
     match(source) {
       return PATTERN.test(source)
@@ -15,15 +15,13 @@ module.exports = function() {
       const manifestFiles = glob.sync(globPattern, { absolute: true })
       const tempJSON = { name, dependencies: {} }
 
-      if (manifestFiles.length) {
-        log(`External manifests found for glob pattern "${globPattern}"`)
+      manifestFiles.forEach((manifestFile) => {
+        const manifestJSON = require(manifestFile)
+        const packagePath = path.dirname(manifestFile)
 
-        manifestFiles.forEach((manifestFile) => {
-          log(`Using external manifest from: ${manifestFile}`)
-          const manifestJSON = require(manifestFile)
-          tempJSON.dependencies[manifestJSON.name] = path.dirname(manifestFile)
-        })
-      }
+        log(`Adding dependency on ${packagePath}`)
+        tempJSON.dependencies[manifestJSON.name] = packagePath
+      })
 
       const outputJSON = JSON.stringify(tempJSON, null, 2)
 
@@ -36,10 +34,10 @@ module.exports = function() {
       }
     }
   }
-}
 
-function log(message) {
-  const prefix = '\u001B[33m'
-  const suffix = '\u001B[39m'
-  console.warn(prefix + 'bower-glob-resolver: ' + message + suffix)
+  function log(message) {
+    if (bower && bower.logger) {
+      bower.logger.info('glob-resolver', message)
+    }
+  }
 }
