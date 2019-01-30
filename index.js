@@ -15,11 +15,15 @@ module.exports = function() {
       const manifestFiles = glob.sync(globPattern, { absolute: true })
       const tempJSON = { name, dependencies: {} }
 
-      manifestFiles.forEach((manifestFile) => {
-        console.log('Loading external manifest from', manifestFile)
-        const manifestJSON = require(manifestFile)
-        tempJSON.dependencies[manifestJSON.name] = path.dirname(manifestFile)
-      })
+      if (manifestFiles.length) {
+        log(`External manifests found for glob pattern "${globPattern}"`)
+
+        manifestFiles.forEach((manifestFile) => {
+          log(`Using external manifest from: ${manifestFile}`)
+          const manifestJSON = require(manifestFile)
+          tempJSON.dependencies[manifestJSON.name] = path.dirname(manifestFile)
+        })
+      }
 
       const outputJSON = JSON.stringify(tempJSON, null, 2)
 
@@ -32,4 +36,10 @@ module.exports = function() {
       }
     }
   }
+}
+
+function log(message) {
+  const prefix = '\u001B[33m'
+  const suffix = '\u001B[39m'
+  console.warn(prefix + message + suffix)
 }
