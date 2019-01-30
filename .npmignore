@@ -1,6 +1,6 @@
 .nyc_output/
 coverage/
-test/
+tests/
 .editorconfig
 .prettierrc.json
 .travis.yml
