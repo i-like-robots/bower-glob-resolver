@@ -9,12 +9,16 @@ describe('bower-glob-resolver', () => {
   })
 
   describe('#match', () => {
-    it('matches sources prefixed with "glob:"', () => {
-      expect(instance.match('glob:path/to/packages')).toEqual(true)
+    it('matches sources prefixed with "glob:" and ending "bower.json"', () => {
+      expect(instance.match('glob:path/to/packages/bower.json')).toEqual(true)
     })
 
-    it('does not match sources not prefixed with "glob:"', () => {
-      expect(instance.match('glob:path/to/packages')).toEqual(true)
+    it('does not match sources not starting with "glob:"', () => {
+      expect(instance.match('path/to/packages/bower.json')).toEqual(false)
+    })
+
+    it('does not match sources not ending with "bower.json"', () => {
+      expect(instance.match('glob:path/to/packages')).toEqual(false)
     })
   })
 

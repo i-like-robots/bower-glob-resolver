@@ -3,15 +3,16 @@ const path = require('path')
 const tmp = require('tmp')
 const glob = require('glob')
 
-const PATTERN = /^glob:/
+const SOURCE_PREFIX = 'glob:'
+const SOURCE_SUFFIX = 'bower.json'
 
 module.exports = function(bower) {
   return {
     match(source) {
-      return PATTERN.test(source)
+      return source.startsWith(SOURCE_PREFIX) && source.endsWith(SOURCE_SUFFIX)
     },
     fetch({ source, name }) {
-      const globPattern = source.replace(PATTERN, '')
+      const globPattern = source.replace(SOURCE_PREFIX, '')
       const manifestFiles = glob.sync(globPattern, { absolute: true })
       const tempJSON = { name, dependencies: {} }
 
@@ -27,6 +28,8 @@ module.exports = function(bower) {
 
       const tmpDir = tmp.dirSync()
       fs.writeFileSync(path.join(tmpDir.name, 'bower.json'), outputJSON)
+
+      console.log(tmpDir)
 
       return {
         tempPath: tmpDir.name,
