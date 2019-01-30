@@ -41,5 +41,5 @@ module.exports = function() {
 function log(message) {
   const prefix = '\u001B[33m'
   const suffix = '\u001B[39m'
-  console.warn(prefix + message + suffix)
+  console.warn(prefix + 'bower-glob-resolver: ' + message + suffix)
 }

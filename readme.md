@@ -41,15 +41,15 @@ For example, a project containing multiple components may use this folder struct
 ```
 my-project/
 ├── components/
-│   ├── header/
+│   ├── footer/
 │   │   └── bower.json
-│   └── footer/
+│   └── header/
 │       └── bower.json
 ├── .bowerrc
 └── bower.json
 ```
 
-To install all of the Bower dependencies for every component in the project a new dependency must be added to the root `bower.json` file (the name doesn't matter so long as it is unique.) The source of this dependency should be a glob pattern matching the component `bower.json` files:
+To install all of the Bower dependencies for every component in the project a new dependency must be added to the root `bower.json` file (the name doesn't matter so long as it is unique.) The source of this dependency should be a glob pattern matching the `bower.json` files for each component:
 
 ```json
 {
@@ -57,6 +57,15 @@ To install all of the Bower dependencies for every component in the project a ne
     "all-component-dependencies": "glob:components/*/bower.json"
   }
 }
+```
+
+If successful when running `bower install` this resolver will log each extra `bower.json` file it finds and uses:
+
+```bash
+$ bower install
+> bower-glob-resolver: External manifests found matching the pattern "components/*/bower.json"
+> bower-glob-resolver: Using external manifest from: /my-project/components/footer/bower.json
+> bower-glob-resolver: Using external manifest from: /my-project/components/header/bower.json
 ```
 
 
