@@ -1,6 +1,9 @@
 # Bower Glob Resolver
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/i-like-robots/bower-glob-resolver.svg)](https://greenkeeper.io/)
+<div align="center">
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/i-like-robots/bower-glob-resolver/blob/master/LICENSE) [![Build Status](https://travis-ci.org/i-like-robots/bower-glob-resolver.svg?branch=master)](https://travis-ci.org/i-like-robots/bower-glob-resolver) [![npm version](https://img.shields.io/npm/v/bower-glob-resolver.svg?style=flat)](https://www.npmjs.com/package/bower-glob-resolver) [![Greenkeeper badge](https://badges.greenkeeper.io/i-like-robots/bower-glob-resolver.svg)](https://greenkeeper.io/)
+</div>
 
 A [resolver plugin] for [Bower] which enables the use of multiple, external `bower.json` files in your project which can be found using a [glob pattern]. This can be useful for codebases which contain multiple packages or components or have dependencies installed not using Bower.
 
