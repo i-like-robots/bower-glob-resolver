@@ -1,5 +1,7 @@
 # Bower Glob Resolver
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/i-like-robots/bower-glob-resolver.svg)](https://greenkeeper.io/)
+
 A [resolver plugin] for [Bower] which enables the use of multiple, external `bower.json` files in your project which can be found using a [glob pattern]. This can be useful for codebases which contain multiple packages or components or have dependencies installed not using Bower.
 
 [resolver plugin]: https://bower.io/docs/pluggable-resolvers/
