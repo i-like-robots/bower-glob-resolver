@@ -3,10 +3,18 @@ const rimraf = require('rimraf')
 const subject = require('../')
 
 describe('bower-glob-resolver', () => {
+  let bower
   let instance
 
   beforeEach(() => {
-    instance = subject()
+    bower = {
+      config: {
+        cwd: process.cwd()
+      },
+      logger: jasmine.createSpyObj('logger', ['info', 'warn', 'error'])
+    }
+
+    instance = subject(bower)
   })
 
   describe('#match', () => {
@@ -42,6 +50,10 @@ describe('bower-glob-resolver', () => {
 
     it('creates a temporary package with the given name', () => {
       expect(result.name).toEqual('component-dependencies')
+    })
+
+    it('logs each match found', () => {
+      expect(bower.logger.info).toHaveBeenCalledTimes(2)
     })
 
     it('adds all glob matches as dependencies', () => {

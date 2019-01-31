@@ -4,4 +4,3 @@ tests/
 .editorconfig
 .prettierrc.json
 .travis.yml
-greenkeeper.json

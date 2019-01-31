@@ -13,7 +13,7 @@ module.exports = function(bower) {
     },
     fetch({ source, name }) {
       const globPattern = source.replace(SOURCE_PREFIX, '')
-      const manifestFiles = glob.sync(globPattern, { absolute: true })
+      const manifestFiles = glob.sync(globPattern, { cwd: bower.config.cwd, absolute: true })
       const tempJSON = { name, dependencies: {} }
 
       manifestFiles.forEach((manifestFile) => {
