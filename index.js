@@ -11,7 +11,7 @@ module.exports = function(bower) {
     match(source) {
       return source.startsWith(SOURCE_PREFIX) && source.endsWith(SOURCE_SUFFIX)
     },
-    fetch({ source, name }) {
+    fetch({ name, source }) {
       const globPattern = source.replace(SOURCE_PREFIX, '')
       const manifestFiles = glob.sync(globPattern, { cwd: bower.config.cwd, absolute: true })
       const tempJSON = { name, dependencies: {} }
@@ -24,9 +24,9 @@ module.exports = function(bower) {
         tempJSON.dependencies[manifestJSON.name] = manifestPath
       })
 
-      const outputJSON = JSON.stringify(tempJSON, null, 2)
-
       const tmpDir = tmp.dirSync()
+      const outputJSON = JSON.stringify(tempJSON)
+
       fs.writeFileSync(path.join(tmpDir.name, 'bower.json'), outputJSON)
 
       return {
@@ -37,8 +37,6 @@ module.exports = function(bower) {
   }
 
   function log(message) {
-    if (bower && bower.logger) {
-      bower.logger.info('glob-resolver', message)
-    }
+    bower.logger.info('glob-resolver', message)
   }
 }
