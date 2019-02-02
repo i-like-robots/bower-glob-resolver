@@ -37,7 +37,7 @@ describe('bower-glob-resolver', () => {
 
     beforeEach(() => {
       temp = instance.fetch({
-        name: 'component-dependencies',
+        name: 'components',
         source: 'glob:./tests/fixture/components/*/bower.json'
       })
 
@@ -45,11 +45,12 @@ describe('bower-glob-resolver', () => {
     })
 
     afterEach(() => {
+      // The cleanup callback returned by tmp is not recursive so use rimraf
       rimraf.sync(temp.tempPath)
     })
 
     it('creates a temporary package with the given name', () => {
-      expect(result.name).toEqual('component-dependencies')
+      expect(result.name).toEqual('components')
     })
 
     it('logs each match found', () => {
@@ -57,8 +58,7 @@ describe('bower-glob-resolver', () => {
     })
 
     it('adds all glob matches as dependencies', () => {
-      const dependencies = Object.keys(result.dependencies)
-      expect(dependencies).toEqual(['footer-component', 'header-component'])
+      expect(Object.keys(result.dependencies)).toEqual(['footer', 'header'])
     })
   })
 })
