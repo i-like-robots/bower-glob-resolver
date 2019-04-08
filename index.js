@@ -36,7 +36,8 @@ module.exports = function(bower) {
     },
     releases() {
       // There are no versions to return but this method is required by `bower list`
-      return []
+      // At least one release is required for `bower install` but the version doesn't matter.
+      return [{ target: 'v0.0.0', version: '0.0.0' }]
     }
   }
 
