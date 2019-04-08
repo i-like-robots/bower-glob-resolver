@@ -1,6 +1,6 @@
 {
   "name": "bower-glob-resolver",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A resolver plugin for Bower which enables the use of multiple bower.json files which are found using a glob pattern.",
   "main": "index.js",
   "scripts": {
