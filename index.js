@@ -33,6 +33,10 @@ module.exports = function(bower) {
         tempPath: tmpDir.name,
         removeIgnores: true
       }
+    },
+    releases() {
+      // There are no versions to return but this method is required by `bower list`
+      return []
     }
   }
 
