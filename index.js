@@ -25,7 +25,7 @@ module.exports = function(bower) {
       })
 
       const tmpDir = tmp.dirSync()
-      const outputJSON = JSON.stringify(tempJSON)
+      const outputJSON = JSON.stringify(tempJSON, null, 2)
 
       fs.writeFileSync(path.join(tmpDir.name, 'bower.json'), outputJSON)
 
